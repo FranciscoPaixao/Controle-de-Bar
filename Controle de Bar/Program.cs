@@ -1,10 +1,15 @@
-﻿namespace Controle_de_Bar
+﻿using Controle_de_Bar;
+using Controle_de_Bar.ModuloProduto;
+
+namespace ControleDeBar.ConsoleApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            CLIPrincipal cliPrincipal = new CLIPrincipal();
+            cliPrincipal.MenuPrincipal();
+            
         }
     }
 }

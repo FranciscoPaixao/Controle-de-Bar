@@ -8,4 +8,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="ModuloFaturamento\**" />
+    <EmbeddedResource Remove="ModuloFaturamento\**" />
+    <None Remove="ModuloFaturamento\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ModuloFuncionario\" />
+    <Folder Include="ModuloMesa\" />
+    <Folder Include="ModuloProduto\" />
+  </ItemGroup>
+
 </Project>
