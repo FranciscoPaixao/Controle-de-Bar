@@ -11,12 +11,12 @@ namespace Controle_de_Bar.ModuloConta
     public class Conta : EntidadeBase
     {
         public string nomeCliente;
-        public int mesa;
+        public Mesa mesa;
         public Dictionary<int, int> produtos;
         public double valorTotal;
         public DateTime dataDaConta;
         
-        public Conta(int id = -1, string nomeCliente = "", int mesa = -1,  Dictionary<int, int> produtos = null, double valorTotal = 0, DateTime dataDaConta = default(DateTime))
+        public Conta(int id = -1, string nomeCliente = "", Mesa mesa = null,  Dictionary<int, int> produtos = null, double valorTotal = 0, DateTime dataDaConta = default(DateTime))
         {
             this.id = id;
             this.nomeCliente = nomeCliente;
@@ -42,9 +42,9 @@ namespace Controle_de_Bar.ModuloConta
             {
                 mensagens.Add("NOME", "Nome do cliente deve ter no mínimo 3 caracteres!");
             }
-            if(mesa == -1)
+            if(mesa.id < 0)
             {
-                mensagens.Add("MESA", "Número da mesa deve ser maior que 0!");
+                mensagens.Add("MESA", "O ID da mesa deve ser igual ou maior que 0!");
             }
             return mensagens;
         }

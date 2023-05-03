@@ -141,20 +141,19 @@ namespace Controle_de_Bar.ModuloConta
             Console.WriteLine("ID\tNome Cliente\tMesa\tData\tValor Total");
             foreach (Conta conta in registros)
             {
-                Mesa mesa = (Mesa) repositorioMesa.SelecionarPorId(conta.mesa);
-                Console.WriteLine($"{conta.id}\t{conta.nomeCliente}\t{(mesa.etiqueta)}\t{conta.dataDaConta}\t{conta.valorTotal}");
+                Console.WriteLine($"{conta.id}\t{conta.nomeCliente}\t{(conta.mesa.etiqueta)}\t{conta.dataDaConta}\t{conta.valorTotal}");
             }
         }
 
         protected override EntidadeBase ObterRegistro(EntidadeBase registro)
         {
-            Conta conta = (Conta)registro;
+            Conta conta = new Conta();
             Console.WriteLine("Digite o nome do cliente: ");
             string nome = Console.ReadLine();
             conta.nomeCliente = nome;
             Console.WriteLine("Digite o ID da mesa: ");
             int idMesa = Convert.ToInt32(Console.ReadLine());
-            conta.mesa = idMesa;
+            conta.mesa = (Mesa) repositorioMesa.SelecionarPorId(idMesa);
             conta.dataDaConta = DateTime.Now.Date;
             conta.valorTotal = 0;
             return conta;

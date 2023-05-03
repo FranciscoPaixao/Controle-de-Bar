@@ -38,6 +38,9 @@ namespace Controle_de_Bar
             this.cliFuncionario = new CLIFuncionario(repositorioFuncionario);
             this.cliConta = new CLIConta(repositorioConta, repositorioProduto, repositorioMesa);
             this.cliMesa = new CLIMesa(repositorioMesa);
+
+            this.repositorioProduto.Inserir(new Produto(1, "Cerveja", "Gelada",5.00, 10));
+            this.repositorioMesa.Inserir(new Mesa(1, "Mesa A", false));
         }
         public void MenuPrincipal(){
             Console.WriteLine("Bem vindo ao Controle de Bar");
