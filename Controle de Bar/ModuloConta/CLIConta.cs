@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Controle_de_Bar.ModuloFuncionario;
 using Controle_de_Bar.ModuloMesa;
 using Controle_de_Bar.ModuloProduto;
 using ControleDeBar.ConsoleApp.Compartilhado;
@@ -12,11 +13,13 @@ namespace Controle_de_Bar.ModuloConta
     {
         private RepositorioProduto repositorioProduto;
         private RepositorioMesa repositorioMesa;
-        public CLIConta(RepositorioConta repositorioBase, RepositorioProduto repositorioProduto, RepositorioMesa repositorioMesa)
+        private RepositorioFuncionario repositorioFuncionario;
+        public CLIConta(RepositorioConta repositorioBase, RepositorioProduto repositorioProduto, RepositorioMesa repositorioMesa, RepositorioFuncionario repositorioFuncionario)
         {
             this.repositorioBase = repositorioBase;
             this.repositorioProduto = repositorioProduto;
             this.repositorioMesa = repositorioMesa;
+            this.repositorioFuncionario = repositorioFuncionario;
             this.nomeEntidade = "Conta";
             this.sufixo = "s";
         }
@@ -156,6 +159,9 @@ namespace Controle_de_Bar.ModuloConta
             int idMesa = Convert.ToInt32(Console.ReadLine());
             conta.mesa = (Mesa)repositorioMesa.SelecionarPorId(idMesa);
             conta.mesa.ocupada = true;
+            Console.WriteLine("Digite o ID do garçom: ");
+            int idGarcom = Convert.ToInt32(Console.ReadLine());
+            conta.garcom = (Funcionario) repositorioFuncionario.SelecionarPorId(idGarcom);
             conta.dataDaConta = DateTime.Now.Date;
             conta.valorTotal = 0;
             return conta;

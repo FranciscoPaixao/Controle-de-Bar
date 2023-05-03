@@ -36,11 +36,12 @@ namespace Controle_de_Bar
 
             this.cliProduto = new CLIProduto(repositorioProduto);
             this.cliFuncionario = new CLIFuncionario(repositorioFuncionario);
-            this.cliConta = new CLIConta(repositorioConta, repositorioProduto, repositorioMesa);
+            this.cliConta = new CLIConta(repositorioConta, repositorioProduto, repositorioMesa, repositorioFuncionario);
             this.cliMesa = new CLIMesa(repositorioMesa);
 
             this.repositorioProduto.Inserir(new Produto(1, "Cerveja", "Gelada",5.00, 10));
             this.repositorioMesa.Inserir(new Mesa(1, "Mesa A", false));
+            this.repositorioFuncionario.Inserir(new Funcionario(1, "Garçom 1", "Garçom"));
         }
         public void MenuPrincipal(){
             Console.WriteLine("Bem vindo ao Controle de Bar");

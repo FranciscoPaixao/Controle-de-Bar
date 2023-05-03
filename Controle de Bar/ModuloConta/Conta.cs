@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Controle_de_Bar.ModuloMesa;
 using Controle_de_Bar.ModuloProduto;
 using ControleDeBar.ConsoleApp.Compartilhado;
+using Controle_de_Bar.ModuloFuncionario;
 
 namespace Controle_de_Bar.ModuloConta
 {
@@ -12,15 +13,17 @@ namespace Controle_de_Bar.ModuloConta
     {
         public string nomeCliente;
         public Mesa mesa;
+        public Funcionario garcom; 
         public Dictionary<int, int> produtos;
         public double valorTotal;
         public DateTime dataDaConta;
 
-        public Conta(int id = -1, string nomeCliente = "", Mesa mesa = null, Dictionary<int, int> produtos = null, double valorTotal = 0, DateTime dataDaConta = default(DateTime))
+        public Conta(int id = -1, string nomeCliente = "", Mesa mesa = null, Funcionario garcom = null, Dictionary<int, int> produtos = null, double valorTotal = 0, DateTime dataDaConta = default(DateTime))
         {
             this.id = id;
             this.nomeCliente = nomeCliente;
             this.mesa = mesa;
+            this.garcom = garcom;
             if (produtos == null)
             {
                 this.produtos = new Dictionary<int, int>();
@@ -37,6 +40,7 @@ namespace Controle_de_Bar.ModuloConta
             Conta pedidoAtualizado = (Conta)registroAtualizado;
             this.nomeCliente = pedidoAtualizado.nomeCliente;
             this.mesa = pedidoAtualizado.mesa;
+            this.garcom = pedidoAtualizado.garcom;
             this.produtos = pedidoAtualizado.produtos;
             this.valorTotal = pedidoAtualizado.valorTotal;
 
@@ -49,9 +53,13 @@ namespace Controle_de_Bar.ModuloConta
             {
                 mensagens.Add("NOME", "Nome do cliente deve ter no mínimo 3 caracteres!");
             }
-            if (mesa.id < 0)
+            if (mesa.id < 1)
             {
-                mensagens.Add("MESA", "O ID da mesa deve ser igual ou maior que 0!");
+                mensagens.Add("MESA", "O ID da mesa deve ser maior que 0!");
+            }
+            if (garcom.id < 1)
+            {
+                mensagens.Add("GARCOM", "O ID do garçom deve ser maior que 0!");
             }
             return mensagens;
         }
