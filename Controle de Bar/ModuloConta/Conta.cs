@@ -15,19 +15,26 @@ namespace Controle_de_Bar.ModuloConta
         public Dictionary<int, int> produtos;
         public double valorTotal;
         public DateTime dataDaConta;
-        
-        public Conta(int id = -1, string nomeCliente = "", Mesa mesa = null,  Dictionary<int, int> produtos = null, double valorTotal = 0, DateTime dataDaConta = default(DateTime))
+
+        public Conta(int id = -1, string nomeCliente = "", Mesa mesa = null, Dictionary<int, int> produtos = null, double valorTotal = 0, DateTime dataDaConta = default(DateTime))
         {
             this.id = id;
             this.nomeCliente = nomeCliente;
             this.mesa = mesa;
-            this.produtos = produtos;
+            if (produtos == null)
+            {
+                this.produtos = new Dictionary<int, int>();
+            }
+            else
+            {
+                this.produtos = produtos;
+            }
             this.valorTotal = valorTotal;
             this.dataDaConta = dataDaConta;
         }
         public override void AtualizarInformacoes(EntidadeBase registroAtualizado)
         {
-            Conta pedidoAtualizado = (Conta) registroAtualizado;
+            Conta pedidoAtualizado = (Conta)registroAtualizado;
             this.nomeCliente = pedidoAtualizado.nomeCliente;
             this.mesa = pedidoAtualizado.mesa;
             this.produtos = pedidoAtualizado.produtos;
@@ -38,11 +45,11 @@ namespace Controle_de_Bar.ModuloConta
         public override Dictionary<string, string> Validar()
         {
             Dictionary<string, string> mensagens = new Dictionary<string, string>();
-            if(nomeCliente.Length < 3)
+            if (nomeCliente.Length < 3)
             {
                 mensagens.Add("NOME", "Nome do cliente deve ter no mínimo 3 caracteres!");
             }
-            if(mesa.id < 0)
+            if (mesa.id < 0)
             {
                 mensagens.Add("MESA", "O ID da mesa deve ser igual ou maior que 0!");
             }

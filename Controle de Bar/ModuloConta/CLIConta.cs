@@ -33,10 +33,11 @@ namespace Controle_de_Bar.ModuloConta
             Console.WriteLine($"Digite 5 para Visualizar faturamento por dia\n");
 
             Console.WriteLine("Digite s para Sair");
-            
+
             string opcao = Console.ReadLine();
 
-            switch(opcao){
+            switch (opcao)
+            {
                 case "1":
                     InserirNovoRegistro();
                     break;
@@ -92,7 +93,7 @@ namespace Controle_de_Bar.ModuloConta
             Console.WriteLine("Digite o ID do produto que deseja adicionar ao pedido: ");
             int idProduto = Convert.ToInt32(Console.ReadLine());
             Produto produto = (Produto)repositorioProduto.SelecionarPorId(idProduto);
-            if (produto.quantidade == 0)
+            if (produto.quantidade  < 1)
             {
                 MostrarMensagem("Produto indisponível", ConsoleColor.Red);
                 return;
@@ -153,7 +154,8 @@ namespace Controle_de_Bar.ModuloConta
             conta.nomeCliente = nome;
             Console.WriteLine("Digite o ID da mesa: ");
             int idMesa = Convert.ToInt32(Console.ReadLine());
-            conta.mesa = (Mesa) repositorioMesa.SelecionarPorId(idMesa);
+            conta.mesa = (Mesa)repositorioMesa.SelecionarPorId(idMesa);
+            conta.mesa.ocupada = true;
             conta.dataDaConta = DateTime.Now.Date;
             conta.valorTotal = 0;
             return conta;
